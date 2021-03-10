@@ -1,0 +1,44 @@
+<mvc:View
+    controllerName="viz.graficoline.controller.Line"
+	xmlns="sap.m"
+	xmlns:viz="sap.viz.ui5.controls"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data"
+    height="100%"
+>
+
+	<layout:FixFlex id='chartFixFlex' minFlexSize="150">
+        <layout:flexContent>
+            <viz:Popover id="idPopOver"></viz:Popover>
+            <viz:VizFrame 
+				id="idVizFrame" 
+				uiConfig="{applicationSet:'fiori'}"
+                height='80%' 
+				width="80%" 
+				vizType='line'
+			>
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{/dados}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Dia" value="{Dia}" />
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="Programado" value="{Programado}" />
+                            <viz.data:MeasureDefinition name="Realizado" value="{Realizado}" />
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+                    <viz.feeds:FeedItem id='valueAxisFeed1' uid="valueAxis" type="Measure" values="Programado"  />
+                    <viz.feeds:FeedItem id='valueAxisFeed2' uid="valueAxis" type="Measure" values="Realizado"  />
+                    <viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Dia" />
+                </viz:feeds>
+
+            </viz:VizFrame>
+        </layout:flexContent>
+    </layout:FixFlex>
+
+</mvc:View>
